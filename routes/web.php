@@ -28,4 +28,5 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
     Route::post('password/reset', 'Auth\ResetPasswordController@reset');
     Route::get('register', 'Auth\RegisterController@showRegistrationForm');
     Route::post('register', 'Auth\RegisterController@register');
+    Route::get('home', 'HomeController@index');
 });
