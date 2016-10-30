@@ -15,3 +15,5 @@ Admin and User Login demo with session management
     
 5. Now run in your browser the project with url.
 6. For admin just add admin and you will see login for admin
+
+We can define more login option by defining guards and respective providers and Eloquent.
