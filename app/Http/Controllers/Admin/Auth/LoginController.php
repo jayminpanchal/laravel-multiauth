@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
@@ -35,7 +36,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest.admin', ['except' => 'logout']);
+        $this->middleware('admin.guest')->except('logout');
     }
 
     public function showLoginForm()
@@ -43,13 +44,19 @@ class LoginController extends Controller
         return view('admin.auth.login');
     }
 
-    /**
-     * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
-     */
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->flush();
+
+        $request->session()->regenerate();
+
+        return redirect('/admin');
+    }
+
     protected function guard()
     {
-        return Auth::guard('admins');
+        return Auth::guard('admin');
     }
 }

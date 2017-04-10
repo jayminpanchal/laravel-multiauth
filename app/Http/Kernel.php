@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AdminRedirectIfAuthenticated;
+use App\Http\Middleware\AdminRedirectIfNotAuthenticated;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -56,5 +58,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'admin.auth' => AdminRedirectIfNotAuthenticated::class,
+        'admin.guest' => AdminRedirectIfAuthenticated::class,
     ];
 }
